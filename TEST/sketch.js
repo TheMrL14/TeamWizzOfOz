@@ -14,7 +14,7 @@ function setup() {
   gui.add(head, 'yRadiusHead', 20, 60);
   gui.add(head, 'shape');
   gui.add(head, 'borderRadius', 0, 20);
-  gui.add(head, 'hoeken', 0, 20);
+  gui.add(head, 'hoeken', 0, 6);
 
 }
 
@@ -28,6 +28,7 @@ function draw() {
     translate(0, -yRadiusHead / 2);
     rect(80, 80, head.xRadiusHead, head.yRadiusHead, head.borderRadius);
   } else {
+    rectMode(CORNER);
     translate(0, -yRadiusHead / 2);
     polygon(80, 80, head.xRadiusHead, head.yRadiusHead, head.hoeken);
   }
