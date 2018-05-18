@@ -17,20 +17,20 @@ function setup() {
 
 function draw() {
   if (randomHead) {
-    translate(0, -yRadiusHead/2);
+    translate(0, -yRadiusHead / 2);
     ellipse(80, 80, xRadiusHead, yRadiusHead);
   } else {
     rectMode(CENTER);
-    translate(0, -yRadiusHead/2);
+    translate(0, -yRadiusHead / 2);
     rect(80, 80, xRadiusHead, yRadiusHead, radiusCorners);
   }
 
   if (randomBody) {
-    translate(0, +yRadiusBody/2 + yRadiusHead/2);
+    translate(0, +yRadiusBody / 2 + yRadiusHead / 2);
     ellipse(80, 80, xRadiusBody, yRadiusBody);
   } else {
     rectMode(CENTER);
-    translate(0, +yRadiusBody/2 + yRadiusHead/2);
+    translate(0, +yRadiusBody / 2 + yRadiusHead / 2);
     rect(80, 80, xRadiusBody, yRadiusBody, radiusCorners);
   }
 
