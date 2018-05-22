@@ -12,8 +12,9 @@ function setup() {
 
   xRadiusBody = random(60, 120);
   yRadiusBody = random(60, 100);
-
 }
+
+
 
 function draw() {
   if (randomHead) {
@@ -33,5 +34,4 @@ function draw() {
     translate(0, +yRadiusBody/2 + yRadiusHead/2);
     rect(80, 80, xRadiusBody, yRadiusBody, radiusCorners);
   }
-
 }
