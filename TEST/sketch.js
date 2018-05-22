@@ -35,14 +35,14 @@ function draw() {
 
 
 
-  // if (randomBody) {
-  //   translate(0, +yRadiusBody / 2 + yRadiusHead / 2);
-  //   ellipse(80, 80, xRadiusBody, yRadiusBody);
-  // } else {
-  //   rectMode(CENTER);
-  //   translate(0, +yRadiusBody / 2 + yRadiusHead / 2);
-  //   rect(80, 80, xRadiusBody, yRadiusBody, radiusCorners);
-  // }
+  if (randomBody) {
+    translate(0, +yRadiusBody / 2 + yRadiusHead / 2);
+    ellipse(80, 80, xRadiusBody, yRadiusBody);
+  } else {
+    rectMode(CENTER);
+    translate(0, +yRadiusBody / 2 + yRadiusHead / 2);
+    rect(80, 80, xRadiusBody, yRadiusBody, radiusCorners);
+  }
 
 }
 
