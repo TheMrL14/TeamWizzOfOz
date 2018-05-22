@@ -1,17 +1,15 @@
-var head, body;
-var xRadiusHead, yRadiusHead
-var xRadiusBody, yRadiusBody
+var head, body, neck;
+var xRadiusHead, yRadiusHead;
+var xRadiusNeck, yRadiusNeck;
+var xRadiusBody, yRadiusBody;
 var randomHead;
 var randomBody;
-var Neck, shapes, shape;
+var NeckSpace;
 
 function setup() {
-  shapes = {
-    CIRCLE: 0,
-    RECT: 1,
-    POLYGON: 2
-  }
-  Neck = random(0, 20);
+
+  NeckSpace = random(0, 20);
+
   createCanvas(1000, 1000);
   head = new headText();
   var GUI = new dat.GUI();
@@ -26,6 +24,10 @@ function setup() {
   GUIbody.add(body, 'shape');
   GUIbody.add(body, 'borderRadius', 0, 20);
   GUIbody.add(body, 'hoeken', 5, 40);
+  var GUIneck = GUI.addFolder('neck');
+  GUIneck.add(neck, 'xRadiusNeck', 10, 20);
+  GUIneck.add(neck, 'yRadiusNeck', 20, 50);
+  GUIneck.add(neck, 'shape');
 
 }
 
@@ -50,7 +52,7 @@ function draw() {
       break;
   }
 
-  translate(0, body.yRadiusBody / 2 + head.radiusHead.y / 2 + Neck);
+  translate(0, body.yRadiusBody / 2 + head.radiusHead.y / 2 + NeckSpace);
 
   switch (body.shape) {
     case shapes.CIRCLE:
