@@ -1,19 +1,24 @@
-var head, body, neck;
-var xRadiusHead, yRadiusHead;
-var xRadiusNeck, yRadiusNeck;
-var xRadiusBody, yRadiusBody;
+var head, body;
+var xRadiusHead, yRadiusHead
+var xRadiusBody, yRadiusBody
+var xRadiusNeck, yRadiusNeck
 var randomHead;
 var randomBody;
-var NeckSpace;
+var Neckspace, shapes, shape;
 
 function setup() {
-
   NeckSpace = random(0, 20);
-
+  shapes = {
+    CIRCLE: 0,
+    RECT: 1,
+    POLYGON: 2
+  }
+  Neck = random(0, 20);
   createCanvas(1000, 1000);
   head = new headText();
-  var GUI = new dat.GUI();
   body = new bodyText();
+  neck = new neckText();
+  var GUI = new dat.GUI();
   var GUIhead = GUI.addFolder('head');
   GUIhead.add(head, 'shape');
   GUIhead.add(head, 'borderRadius', 0, 20);
@@ -37,6 +42,12 @@ function draw() {
   // c = color('hsb('color')');
   // fill(c);
 
+  switch (neck.shape) {
+    case shapes.RECT:
+      rectMode(CENTER);
+      rect(80, 80 + head.radiusHead.y / 2, neck.xRadiusNeck, neck.yRadiusNeck);
+      break;
+  }
 
   switch (head.shape) {
     case shapes.CIRCLE:
@@ -51,6 +62,9 @@ function draw() {
       polygon(80, 80, head.radiusHead.x / 2, head.radiusHead.y / 2, head.hoeken);
       break;
   }
+
+
+
 
   translate(0, body.yRadiusBody / 2 + head.radiusHead.y / 2 + NeckSpace);
 
@@ -74,7 +88,7 @@ function headText() {
   this.radiusHead = checkXYRadius(random(30, 70), random(30, 70));
   this.shape = Math.round(random(0, 2));
   this.borderRadius = Math.round(random(1, 20));
-  this.hoeken = Math.round(random(5, 20));
+  this.hoeken = Math.round(random(5, 10));
 };
 
 function bodyText() {
@@ -82,7 +96,13 @@ function bodyText() {
   this.yRadiusBody = random(60, 150);
   this.shape = Math.round(random(0, 2));
   this.borderRadius = random(0, 20);
-  this.hoeken = random(5, 40)
+  this.hoeken = random(5, 10)
+};
+
+function neckText() {
+  this.xRadiusNeck = random(10, 20);
+  this.yRadiusNeck = 50;
+  this.shape = 1;
 };
 
 
