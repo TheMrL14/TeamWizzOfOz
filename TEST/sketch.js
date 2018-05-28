@@ -111,8 +111,8 @@ function draw() {
 
 function head() {
   this.radiusHead = checkXYRadius(random(30, 70), random(30, 70));
-  this.triangleWidth = random(20, 50);
-  this.triangleHeight = random(20, 30);
+  this.triangleWidth = random(30, 60);
+  this.triangleHeight = random(30, 40);
   this.shape = Math.round(random(0, 3));
   this.borderRadius = Math.round(random(1, 20));
   this.hoeken = Math.round(random(6, 10));
@@ -253,6 +253,7 @@ function legs() {
   this.sat = 80;
   this.brightness = 90;
   this.strokeWeight = random(3, 6);
+  this.shadowHeight = 15;
 };
 
 function knee() {
@@ -319,8 +320,8 @@ function elbow() {
 };
 
 function foot() {
-  this.xRadiusKnee = legs.xRadiuslegs + 7;
-  this.yRadiusKnee = random(20, 30);
+  this.xRadiusFoot = knee.xRadiusKnee + 10;
+  this.yRadiusFoot = knee.xRadiusKnee + 10;
   this.shape = 1;
   this.color = random(0, 100);
   this.sat = 80;
@@ -376,11 +377,12 @@ function drawHead() {
       translate(0, -body.yRadiusBody / 2 - head.radiusHead.y / 2 - neck.NeckSpace);
       ellipseMode(CENTER);
       stroke(27, 40, 51);
-      line(startPoint.x, (startPoint.y - head.radiusHead.y / 2) + 10, startPoint.x, (startPoint.y - head.radiusHead.y / 2) - hat.height);
+      line(startPoint.x, (startPoint.y - head.radiusHead.y / 2), startPoint.x, (startPoint.y - head.radiusHead.y / 2) - hat.height);
       colorMode(HSB, 100);
       fill(legs.color, legs.sat, legs.brightness);
       noStroke();
-      rect(startPoint.x - 8, (startPoint.y - head.radiusHead.y / 2) - 5, 16, 10, hat.borderRadius)
+      rectMode(CENTER); 
+      rect(startPoint.x, startPoint.y - head.radiusHead.y / 2, 16, 10, hat.borderRadius)
       colorMode(HSB, 100);
       fill(knee.color, knee.sat, knee.brightness);
       noStroke();
@@ -399,19 +401,20 @@ function drawHead() {
       colorMode(HSB, 100);
       translate(0, -body.yRadiusBody / 2 - head.radiusHead.y / 2 - neck.NeckSpace);
       stroke(27, 40, 51);
-      line((startPoint.x - head.radiusHead.x / 2) + 10, startPoint.y, (startPoint.x - head.radiusHead.x / 2) - ear.width, startPoint.y);
+      line((startPoint.x - head.radiusHead.x / 2), startPoint.y, (startPoint.x - head.radiusHead.x / 2) - ear.width, startPoint.y);
       colorMode(HSB, 100);
       fill(legs.color, legs.sat, legs.brightness);
       noStroke();
-      rect((startPoint.x - head.radiusHead.x / 2 - 4), startPoint.y - 8, 10, 16, hat.borderRadius);
+      rectMode(CENTER);
+      rect((startPoint.x - head.radiusHead.x / 2), startPoint.y, 10, 16, hat.borderRadius);
       fill(knee.color, knee.sat, knee.brightness);
       noStroke();
       ellipse((startPoint.x - head.radiusHead.x / 2) - ear.width, startPoint.y, 3, 3);
       stroke(27, 40, 51);
-      line((startPoint.x + head.radiusHead.x / 2) - 10, startPoint.y, (startPoint.x + head.radiusHead.x / 2) + ear.width, startPoint.y);
+      line((startPoint.x + head.radiusHead.x / 2), startPoint.y, (startPoint.x + head.radiusHead.x / 2) + ear.width, startPoint.y);
       fill(legs.color, legs.sat, legs.brightness)
       noStroke();
-      rect((startPoint.x + head.radiusHead.x / 2 - 7), startPoint.y - 8, 10, 16, hat.borderRadius);
+      rect((startPoint.x + head.radiusHead.x / 2), startPoint.y, 10, 16, hat.borderRadius);
       fill(knee.color, knee.sat, knee.brightness);
       noStroke();
       ellipse((startPoint.x + head.radiusHead.x / 2) + ear.width, startPoint.y, 3, 3);
@@ -470,7 +473,7 @@ function drawHead() {
       noStroke();
       translate(startPoint.x, startPoint.y);
       rotate(radians(r));
-      triangle(0, -30, 20 + head.triangleWidth - 10, head.triangleHeight, -20 - head.triangleWidth + 10, head.triangleHeight);
+      triangle(0, -head.triangleHeight, head.triangleWidth, head.triangleHeight, -head.triangleWidth, head.triangleHeight);
       pop();
       break;
   }
@@ -570,7 +573,6 @@ function drawHead() {
       pop();
       break;
   }
-
 }
 
 function drawLegs() {
@@ -580,23 +582,23 @@ function drawLegs() {
       c = color(0, 0, 0, 45);
       fill(c);
       noStroke();
-      arc(startPoint.x + body.xRadiusBody / 2 - body.xRadiusBody / 2, startPoint.y + body.yRadiusBody / 2 + legs.yRadiuslegs - 15, 100, 15, HALF_PI, PI + HALF_PI);
+      arc(startPoint.x + body.xRadiusBody / 2 - body.xRadiusBody / 2, startPoint.y + body.yRadiusBody / 2 + legs.yRadiuslegs - legs.shadowHeight, 100, 15, HALF_PI, PI + HALF_PI);
       c = color(0, 0, 0, 50);
       fill(c);
       noStroke();
-      arc(startPoint.x + body.xRadiusBody / 2 - body.xRadiusBody / 2, startPoint.y + body.yRadiusBody / 2 + legs.yRadiuslegs - 15, 100, 15, PI + HALF_PI, HALF_PI);
+      arc(startPoint.x + body.xRadiusBody / 2 - body.xRadiusBody / 2, startPoint.y + body.yRadiusBody / 2 + legs.yRadiuslegs - legs.shadowHeight, 100, 15, PI + HALF_PI, HALF_PI);
       rectMode(CORNER);
       colorMode(HSB, 100);
       fill(legs.color, legs.sat, legs.brightness);
       noStroke();
-      rect(startPoint.x - legs.xRadiuslegs / 2 - legs.legspace, startPoint.y + body.yRadiusBody / 2 - 20, legs.xRadiuslegs, legs.yRadiuslegs);
-      rect(startPoint.x - legs.xRadiuslegs / 2 + legs.legspace, startPoint.y + body.yRadiusBody / 2 - 20, legs.xRadiuslegs, legs.yRadiuslegs);
+      rect(startPoint.x - legs.xRadiuslegs / 2 - legs.legspace, startPoint.y + body.yRadiusBody / 2 - startPoint.y / 4, legs.xRadiuslegs, legs.yRadiuslegs);
+      rect(startPoint.x - legs.xRadiuslegs / 2 + legs.legspace, startPoint.y + body.yRadiusBody / 2 - startPoint.y / 4, legs.xRadiuslegs, legs.yRadiuslegs);
       rectMode(CENTER);
       colorMode(HSB, 100);
       fill(knee.color, knee.sat, knee.brightness);
       noStroke();
-      rect(startPoint.x - legs.legspace, startPoint.y + body.yRadiusBody / 2 + legs.yRadiuslegs / 2 - 20, knee.xRadiusKnee, knee.yRadiusKnee, knee.borderRadius);
-      rect(startPoint.x + legs.legspace, startPoint.y + body.yRadiusBody / 2 + legs.yRadiuslegs / 2 - 20, knee.xRadiusKnee, knee.yRadiusKnee, knee.borderRadius);
+      rect(startPoint.x - legs.legspace, startPoint.y + body.yRadiusBody / 2 + legs.yRadiuslegs / 2 - startPoint.y / 4, knee.xRadiusKnee, knee.yRadiusKnee, knee.borderRadius);
+      rect(startPoint.x + legs.legspace, startPoint.y + body.yRadiusBody / 2 + legs.yRadiuslegs / 2 - startPoint.y / 4, knee.xRadiusKnee, knee.yRadiusKnee, knee.borderRadius);
       pop();
       break;
     case legshape.CIRCLE:
@@ -604,23 +606,23 @@ function drawLegs() {
       c = color(0, 0, 0, 45);
       fill(c);
       noStroke();
-      arc(startPoint.x + body.xRadiusBody / 2 - body.xRadiusBody / 2, startPoint.y + body.yRadiusBody / 2 + legs.yRadiuslegs - 15, 100, 15, HALF_PI, PI + HALF_PI);
+      arc(startPoint.x + body.xRadiusBody / 2 - body.xRadiusBody / 2, startPoint.y + body.yRadiusBody / 2 + legs.yRadiuslegs - legs.shadowHeight, 100, 15, HALF_PI, PI + HALF_PI);
       c = color(0, 0, 0, 50);
       fill(c);
       noStroke();
-      arc(startPoint.x + body.xRadiusBody / 2 - body.xRadiusBody / 2, startPoint.y + body.yRadiusBody / 2 + legs.yRadiuslegs - 15, 100, 15, PI + HALF_PI, HALF_PI);
+      arc(startPoint.x + body.xRadiusBody / 2 - body.xRadiusBody / 2, startPoint.y + body.yRadiusBody / 2 + legs.yRadiuslegs - legs.shadowHeight, 100, 15, PI + HALF_PI, HALF_PI);
       rectMode(CORNER);
       colorMode(HSB, 100);
       fill(legs.color, legs.sat, legs.brightness);
       noStroke();
-      rect(startPoint.x - legs.xRadiuslegs / 2 - legs.legspace, startPoint.y + body.yRadiusBody / 2 - 20, legs.xRadiuslegs, legs.yRadiuslegs);
-      rect(startPoint.x - legs.xRadiuslegs / 2 + legs.legspace, startPoint.y + body.yRadiusBody / 2 - 20, legs.xRadiuslegs, legs.yRadiuslegs);
+      rect(startPoint.x - legs.xRadiuslegs / 2 - legs.legspace, startPoint.y + body.yRadiusBody / 2 - startPoint.y / 4, legs.xRadiuslegs, legs.yRadiuslegs);
+      rect(startPoint.x - legs.xRadiuslegs / 2 + legs.legspace, startPoint.y + body.yRadiusBody / 2 - startPoint.y / 4, legs.xRadiuslegs, legs.yRadiuslegs);
       ellipseMode(CENTER);
       colorMode(HSB, 100);
       fill(knee.color, knee.sat, knee.brightness);
       noStroke();
-      ellipse(startPoint.x - legs.legspace, startPoint.y + body.yRadiusBody / 2 + legs.yRadiuslegs / 2 - 20, knee.xRadiusKnee, knee.yRadiusKnee);
-      ellipse(startPoint.x + legs.legspace, startPoint.y + body.yRadiusBody / 2 + legs.yRadiuslegs / 2 - 20, knee.xRadiusKnee, knee.yRadiusKnee);
+      ellipse(startPoint.x - legs.legspace, startPoint.y + body.yRadiusBody / 2 + legs.yRadiuslegs / 2 - startPoint.y / 4, knee.xRadiusKnee, knee.yRadiusKnee);
+      ellipse(startPoint.x + legs.legspace, startPoint.y + body.yRadiusBody / 2 + legs.yRadiuslegs / 2 - startPoint.y / 4, knee.xRadiusKnee, knee.yRadiusKnee);
       pop();
       break;
     case legshape.FLY:
@@ -655,21 +657,21 @@ function drawLegs() {
       c = color(0, 0, 0, 45);
       fill(c);
       noStroke();
-      arc(startPoint.x, startPoint.y + body.yRadiusBody / 2 + legs.yRadiuslegs - 15, 100, 15, HALF_PI, PI + HALF_PI);
-      arc(startPoint.x, startPoint.y + body.yRadiusBody / 2 + legs.yRadiuslegs - 15, 100, 15, PI + HALF_PI, HALF_PI);
+      arc(startPoint.x, startPoint.y + body.yRadiusBody / 2 + legs.yRadiuslegs - legs.shadowHeight, 100, 15, HALF_PI, PI + HALF_PI);
+      arc(startPoint.x, startPoint.y + body.yRadiusBody / 2 + legs.yRadiuslegs - legs.shadowHeight, 100, 15, PI + HALF_PI, HALF_PI);
       rectMode(CORNER);
       colorMode(HSB, 100);
       stroke(forearmL.color, forearmL.sat, forearmL.brightness);
       strokeWeight(legs.strokeWeight);
       noFill();
-      rect(startPoint.x - legs.xRadiuslegs / 2 - legs.legspace, startPoint.y + body.yRadiusBody / 2 - 20, legs.xRadiuslegs, legs.yRadiuslegs);
-      rect(startPoint.x - legs.xRadiuslegs / 2 + legs.legspace, startPoint.y + body.yRadiusBody / 2 - 20, legs.xRadiuslegs, legs.yRadiuslegs);
+      rect(startPoint.x - legs.xRadiuslegs / 2 - legs.legspace, startPoint.y + body.yRadiusBody / 2 - startPoint.y / 4, legs.xRadiuslegs, legs.yRadiuslegs);
+      rect(startPoint.x - legs.xRadiuslegs / 2 + legs.legspace, startPoint.y + body.yRadiusBody / 2 - startPoint.y / 4, legs.xRadiuslegs, legs.yRadiuslegs);
       rectMode(CENTER);
       colorMode(HSB, 100);
       fill(knee.color, knee.sat, knee.brightness);
       noStroke();
-      rect(startPoint.x - legs.legspace, startPoint.y + body.yRadiusBody / 2 + legs.yRadiuslegs / 2 - 20, knee.xRadiusKnee + 5, knee.yRadiusKnee + 5, knee.borderRadius);
-      rect(startPoint.x + legs.legspace, startPoint.y + body.yRadiusBody / 2 + legs.yRadiuslegs / 2 - 20, knee.xRadiusKnee + 5, knee.yRadiusKnee + 5, knee.borderRadius);
+      rect(startPoint.x - legs.legspace, startPoint.y + body.yRadiusBody / 2 + legs.yRadiuslegs / 2 - startPoint.y / 4, knee.xRadiusKnee + 5, knee.yRadiusKnee + 5, knee.borderRadius);
+      rect(startPoint.x + legs.legspace, startPoint.y + body.yRadiusBody / 2 + legs.yRadiuslegs / 2 - startPoint.y / 4, knee.xRadiusKnee + 5, knee.yRadiusKnee + 5, knee.borderRadius);
       pop();
       break;
   }
@@ -685,8 +687,8 @@ function drawLegs() {
       noStroke();
       fill(knee.color, knee.sat, knee.brightness);
 
-      arc(0 - legs.legspace, 5, knee.xRadiusKnee + 10, knee.yRadiusKnee + 10, PI, 0);
-      arc(0 + legs.legspace, 5, knee.xRadiusKnee + 10, knee.yRadiusKnee + 10, PI, 0);
+      arc(-legs.legspace, 5, foot.xRadiusFoot, foot.yRadiusFoot, PI, 0);
+      arc(legs.legspace, 5, foot.xRadiusFoot, foot.yRadiusFoot, PI, 0);
 
       pop();
       break;
@@ -805,7 +807,7 @@ function drawArms() {
       noFill();
       rect(0, 0, armR.xRadiusArmR, armR.yRadiusArmR, 6);
       rotate(-armR.position);
-      translate(-startPointBody.x, -startPointBody.y - body.xRadiusBody / 2);
+      translate(-startPointBody.x, -startPointBody.y);
       pop();
       break;
   }
@@ -817,8 +819,8 @@ function drawArms() {
       colorMode(HSB, 100);
       fill(elbow.color, elbow.sat, elbow.brightness);
       noStroke();
-      ellipse(startPoint.x + elbow.xRadiusElbow / 2 - armL.yRadiusArmL - 5, startPoint.y + 6 + armL.yRadiusArmL * cos(armL.position - armsBreathingRotation / 2), elbow.xRadiusElbow, elbow.yRadiusElbow);
-      ellipse(startPoint.x - elbow.xRadiusElbow / 2 + armR.yRadiusArmR + 5, startPoint.y - 6 + armR.yRadiusArmR * cos(armR.position + armsBreathingRotation / 2), elbow.xRadiusElbow, elbow.yRadiusElbow);
+      ellipse(startPoint.x + 5 - armL.yRadiusArmL, startPoint.y + 6 + armL.yRadiusArmL * cos(armL.position - armsBreathingRotation / 2), elbow.xRadiusElbow, elbow.yRadiusElbow);
+      ellipse(startPoint.x - 5 + armR.yRadiusArmR, startPoint.y - 6 + armR.yRadiusArmR * cos(armR.position + armsBreathingRotation / 2), elbow.xRadiusElbow, elbow.yRadiusElbow);
       pop();
       break;
       /*
@@ -840,13 +842,13 @@ function drawArms() {
       push();
       translate(startPoint.x - armL.yRadiusArmL, startPoint.y + armL.yRadiusArmL * cos(armL.position));
       //rotate(hands.position);
-      rect(-hands.xRadiusHands / 2 - forearmL.yRadiusforearmL * sin(forearmL.position + armsBreathingRotation / 2), -hands.xRadiusHands / 2 + forearmL.yRadiusforearmL * cos(forearmL.position + armsBreathingRotation / 2), hands.xRadiusHands, hands.yRadiusHands, hands.borderRadius);
+      rect(-5 - forearmL.yRadiusforearmL * sin(forearmL.position + armsBreathingRotation / 2), -2 + forearmL.yRadiusforearmL * cos(forearmL.position + armsBreathingRotation / 2), hands.xRadiusHands, hands.yRadiusHands, hands.borderRadius);
       pop();
 
       push();
       translate(startPoint.x + armR.yRadiusArmR, startPoint.y + armR.yRadiusArmR * cos(armR.position));
       //rotate(hands.position);
-      rect(-hands.xRadiusHands - forearmR.yRadiusforearmR * sin(forearmR.position - armsBreathingRotation / 2), -hands.xRadiusHands + forearmR.yRadiusforearmR * cos(forearmR.position - armsBreathingRotation / 2), hands.xRadiusHands, hands.yRadiusHands, hands.borderRadius);
+      rect(-15 - forearmR.yRadiusforearmR * sin(forearmR.position - armsBreathingRotation / 2), -18 + forearmR.yRadiusforearmR * cos(forearmR.position - armsBreathingRotation / 2), hands.xRadiusHands, hands.yRadiusHands, hands.borderRadius);
       pop();
       pop();
       break;
@@ -862,13 +864,13 @@ function drawArms() {
       push();
       translate(startPoint.x - armL.yRadiusArmL + 0 - forearmL.yRadiusforearmL * sin(forearmL.position + armsBreathingRotation / 2), startPoint.y + armL.yRadiusArmL * cos(armL.position + armsBreathingRotation / 2) + 0 + forearmL.yRadiusforearmL * cos(forearmL.position));
       rotate(forearmL.position - radians(205) - armsBreathingRotation / 2);
-      arc(-2, -9, hands.xRadiusHands, hands.yRadiusHands, 0, PI + QUARTER_PI, OPEN);
+      arc(-1, -9, hands.xRadiusHands + 5, hands.yRadiusHands + 5, 0, PI + QUARTER_PI, OPEN);
       pop();
 
       push();
       translate(startPoint.x + armR.yRadiusArmR + 0 - forearmR.yRadiusforearmR * sin(forearmR.position - armsBreathingRotation / 2), startPoint.y + armR.yRadiusArmR * cos(armR.position - armsBreathingRotation / 2) + 0 + forearmR.yRadiusforearmR * cos(forearmR.position));
       rotate(forearmR.position - radians(200) + armsBreathingRotation / 2);
-      arc(-2, -9, hands.xRadiusHands, hands.yRadiusHands, 0, PI + QUARTER_PI, OPEN);
+      arc(-3, -9, hands.xRadiusHands + 5, hands.yRadiusHands + 5, 0, PI + QUARTER_PI, OPEN);
       pop();
       pop();
       break;
@@ -980,6 +982,7 @@ function datGUI() {
   GUIlegs.add(legs, 'legshape');
   GUIlegs.add(legs, 'rocketSpace', 10, 30);
   GUIlegs.add(legs, 'shadowSpace', 50, 150);
+  GUIlegs.add(legs, 'shadowHeight', 15);
   GUIlegs.add(legs, 'legspace', 10, 30);
   GUIlegs.add(legs, 'color', 0, 100);
   GUIlegs.add(legs, 'sat', 0, 100);
@@ -1022,6 +1025,13 @@ function datGUI() {
   GUIForearmR.add(forearmR, 'shape');
   GUIForearmR.add(forearmR, 'borderRadius', 0, 10);
   GUIForearmR.add(forearmR, 'position', radians(180), radians(360));
+  var GUIFoot = GUI.addFolder('foot');
+  GUIFoot.add(foot, 'xRadiusFoot', 20, 30);
+  GUIFoot.add(foot, 'yRadiusFoot', 20, 30);
+  GUIFoot.add(foot, 'shape');
+  GUIFoot.add(foot, 'color', 0, 100);
+  GUIFoot.add(foot, 'sat', 0, 100);
+  GUIFoot.add(foot, 'brightness', 0, 100);
 }
 
 function createParts() {
@@ -1031,8 +1041,8 @@ function createParts() {
   eyeR = new eyeR();
   oneEye = new oneEye();
   legs = new legs();
-  foot = new foot();
   knee = new knee();
+  foot = new foot();
   mouth = new mouth();
   ear = new ear();
   hat = new hat();
