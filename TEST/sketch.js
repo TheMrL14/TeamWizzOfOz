@@ -381,7 +381,7 @@ function drawHead() {
       colorMode(HSB, 100);
       fill(legs.color, legs.sat, legs.brightness);
       noStroke();
-      rectMode(CENTER); 
+      rectMode(CENTER);
       rect(startPoint.x, startPoint.y - head.radiusHead.y / 2, 16, 10, hat.borderRadius)
       colorMode(HSB, 100);
       fill(knee.color, knee.sat, knee.brightness);
