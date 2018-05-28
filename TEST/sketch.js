@@ -864,13 +864,13 @@ function drawArms() {
       push();
       translate(startPoint.x - armL.yRadiusArmL + 0 - forearmL.yRadiusforearmL * sin(forearmL.position + armsBreathingRotation / 2), startPoint.y + armL.yRadiusArmL * cos(armL.position + armsBreathingRotation / 2) + 0 + forearmL.yRadiusforearmL * cos(forearmL.position));
       rotate(forearmL.position - radians(205) - armsBreathingRotation / 2);
-      arc(-1, -9, hands.xRadiusHands + 5, hands.yRadiusHands + 5, 0, PI + QUARTER_PI, OPEN);
+      arc(-2, -9, hands.xRadiusHands + 5, hands.yRadiusHands + 5, 0, PI + QUARTER_PI, OPEN);
       pop();
 
       push();
       translate(startPoint.x + armR.yRadiusArmR + 0 - forearmR.yRadiusforearmR * sin(forearmR.position - armsBreathingRotation / 2), startPoint.y + armR.yRadiusArmR * cos(armR.position - armsBreathingRotation / 2) + 0 + forearmR.yRadiusforearmR * cos(forearmR.position));
       rotate(forearmR.position - radians(200) + armsBreathingRotation / 2);
-      arc(-3, -9, hands.xRadiusHands + 5, hands.yRadiusHands + 5, 0, PI + QUARTER_PI, OPEN);
+      arc(-2, -9, hands.xRadiusHands + 5, hands.yRadiusHands + 5, 0, PI + QUARTER_PI, OPEN);
       pop();
       pop();
       break;
